@@ -18,6 +18,8 @@ export class PrimeNumberComponent implements OnInit {
   onSubmit(formdata) {
     console.log(formdata.value.first_number, formdata.value.second_number)
     let post = { "first_number": formdata.value.first_number, "second_number": formdata.value.second_number }
+    
+    //create service if more than  1 requests are in this method
     this.http.post(this.url, post)
       .subscribe(response => {
         console.log(response._body)
