@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import { PrimeService } from '../prime.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-prime-number',
@@ -8,9 +9,9 @@ import { PrimeService } from '../prime.service';
   styleUrls: ['./prime-number.component.css']
 })
 export class PrimeNumberComponent implements OnInit {
-  primes: Array<Number> = [];
+  primes
   private url: string = "http://localhost:9998/mydata"
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient, private primeService:PrimeService) { }
 
   ngOnInit() {
   }
@@ -18,13 +19,12 @@ export class PrimeNumberComponent implements OnInit {
   onSubmit(formdata) {
     console.log(formdata.value.first_number, formdata.value.second_number)
     let post = { "first_number": formdata.value.first_number, "second_number": formdata.value.second_number }
-    
-    //create service if more than  1 requests are in this method
     this.http.post(this.url, post)
-      .subscribe(response => {
-        console.log(response._body)
-        this.primes = JSON.parse(response._body);
+      .subscribe(response => {   
+       console.log(response, typeof(response))
+        this.primes = response
         console.log(typeof (this.primes))
+     
       })
     formdata.reset();
   }

@@ -1,3 +1,4 @@
+//import librraies and express
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -6,6 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
 
 function checkPrime(number) {
   if (number < 2)
@@ -34,6 +36,7 @@ function computePrimes(first_number, second_number) {
   return primes;
 }
 
+//send response in json, stringified
 app.post('/mydata', function (req, res) {
   res.send(JSON.stringify(computePrimes(req.body.first_number, req.body.second_number)));
   // console.log(req.body.first_number + req.body.second_number)
@@ -41,5 +44,5 @@ app.post('/mydata', function (req, res) {
 
 
 
-
+//change port number if required
 app.listen(9998, () => console.log('Prime number application server running on 9998!'))

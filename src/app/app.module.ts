@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PrimeNumberComponent } from './prime-number/prime-number.component';
 import {HttpModule} from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,7 +13,8 @@ import {HttpModule} from '@angular/http';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
