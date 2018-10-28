@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PrimeNumberComponent implements OnInit {
   primes
+  connectionError:boolean=false;
   private url: string = "http://localhost:9998/mydata"
   constructor(private http: HttpClient, private primeService:PrimeService) { }
 
@@ -20,13 +21,17 @@ export class PrimeNumberComponent implements OnInit {
     console.log(formdata.value.first_number, formdata.value.second_number)
     let post = { "first_number": formdata.value.first_number, "second_number": formdata.value.second_number }
     this.http.post(this.url, post)
-      .subscribe(response => {   
+      .subscribe((response) => {   
        console.log(response, typeof(response))
+       this.connectionError=false;
         this.primes = response
-        console.log(typeof (this.primes))
-     
+    
+       
+      }, error=>{
+        this.connectionError=true
+        console.log("Please Check You connection")
       })
-    formdata.reset();
+         formdata.reset();
   }
 
 }

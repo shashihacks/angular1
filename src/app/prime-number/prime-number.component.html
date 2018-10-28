@@ -32,12 +32,17 @@
     </form>
 
     <div class="content">
-      <div class="row" *ngIf="primes">
+      <div class="row" *ngIf="primes && !connectionError">
         <h2 class="text-center">List of Prime Number</h2>
           <ul class="list-group col-lg-8 col-lg-offset-2 col-xs-12 col-sm-12 col-md-12">
               <a class="list-group-item " *ngFor="let prime of primes">{{prime}} </a>
             </ul>
       </div>
+      <div class="row" *ngIf="connectionError">
+        <h5 class="text-center alert alert-danger">Something went Wrong check your connection</h5>
+
+      </div>
+
     
     </div>
 
